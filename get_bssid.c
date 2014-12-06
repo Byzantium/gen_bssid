@@ -6,7 +6,7 @@
 #define BSSID_SIZE 6
 #define CHAN_SIZE 2
 
-void get_bssid(const char *essid, const unsigned int chan, char *bssid) {
+void get_bssid(const char *essid, const unsigned int chan, unsigned int *bssid) {
   unsigned char hash[BSSID_SIZE];
   memset(hash, '\0', sizeof(hash));
   char channel[CHAN_SIZE];
@@ -41,8 +41,8 @@ int main (int argc, char** argv) {
 		printf("Usage: %s <essid> <channel>\n", argv[0]);
 		return EXIT_FAILURE;
 	}
-	char bssid[BSSID_SIZE];
+	unsigned int bssid[BSSID_SIZE];
 	get_bssid(argv[1], atoi(argv[2]), bssid);
-	printf("%s\n", bssid);
+	printf("%02X:%02X:%02X:%02X:%02X:%02X\n", bssid[0], bssid[1], bssid[2], bssid[3], bssid[4], bssid[5]);
 	return EXIT_SUCCESS;
 }
